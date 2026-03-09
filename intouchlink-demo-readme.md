@@ -133,10 +133,3 @@ Blog / Resources\
 About Us\
 Contact\
 Book a Demo
-
-------------------------------------------------------------------------
-
-# Author
-
-Created as a design concept for **InTouchLink SaaS website rebuild and
-rebrand project**.
