@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>InTouchLink — Community & Operations Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0b1120;
+  --navy2: #111827;
+  --navy3: #1a2540;
+  --slate: #1e2d45;
+  --surface: #192236;
+  --teal: #0ea5e9;
+  --teal2: #38bdf8;
+  --teal-glow: rgba(14,165,233,0.15);
+  --teal-faint: rgba(14,165,233,0.06);
+  --white: #ffffff;
+  --off: #f8fafc;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --muted2: #64748b;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(14,165,233,0.25);
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.07);
+  --grad: linear-gradient(135deg, var(--teal), #6366f1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── GRID BACKGROUND ── */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,165,233,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+}
+.grid-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(14,165,233,0.08) 0%, transparent 60%);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 5%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  background: rgba(11,17,32,0.8);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--teal);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+  letter-spacing: 0.2px;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--teal);
+  color: var(--navy) !important;
+  font-weight: 600 !important;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: all 0.2s !important;
+  box-shadow: 0 0 20px rgba(14,165,233,0.3);
+}
+.nav-cta:hover { background: var(--teal2) !important; transform: translateY(-1px); box-shadow: 0 0 28px rgba(14,165,233,0.45) !important; }
+
+/* ── SECTIONS ── */
+section { position: relative; z-index: 1; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 5%; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+}
+.hero-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-faint);
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--teal2);
+  margin-bottom: 24px;
+  letter-spacing: 0.3px;
+  animation: fadeUp 0.6s ease forwards;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--teal);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--teal);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 4.5vw, 58px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: var(--white);
+  margin-bottom: 22px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero-title span {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 36px;
+  font-weight: 400;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.btn-primary {
+  background: var(--teal);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 13px 28px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 24px rgba(14,165,233,0.35);
+  font-family: 'Inter', sans-serif;
+}
+.btn-primary:hover { background: var(--teal2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(14,165,233,0.45); }
+.btn-ghost {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+.btn-ghost:hover { color: var(--white); }
+.play-icon {
+  width: 34px; height: 34px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.btn-ghost:hover .play-icon { border-color: var(--teal); background: var(--teal-faint); }
+
+/* HERO VISUAL */
+.hero-visual {
+  position: relative;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+}
+.hc-topbar {
+  background: var(--slate);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.hc-dots { display: flex; gap: 6px; }
+.hc-dot { width: 10px; height: 10px; border-radius: 50%; }
+.hc-dot:nth-child(1) { background: #ef4444; }
+.hc-dot:nth-child(2) { background: #f59e0b; }
+.hc-dot:nth-child(3) { background: #22c55e; }
+.hc-url { flex: 1; background: var(--navy3); border-radius: 4px; padding: 4px 12px; font-size: 11px; color: var(--muted2); font-family: monospace; text-align: center; margin: 0 12px; }
+.hc-body { padding: 24px 20px; }
+.hc-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.hc-block {
+  height: 36px;
+  background: var(--navy3);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.hc-block::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.06) 50%, transparent 100%);
+  animation: shimmer 2s ease infinite;
+}
+@keyframes shimmer { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
+.stat-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.stat-mini {
+  flex: 1;
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.stat-mini-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); }
+.stat-mini-label { font-size: 10px; color: var(--muted2); margin-top: 2px; letter-spacing: 0.5px; }
+.stat-mini-change { font-size: 10px; color: #22c55e; margin-top: 3px; }
+.hc-chart { height: 80px; background: var(--navy3); border-radius: 8px; margin-bottom: 10px; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 10px 14px 10px; gap: 6px; }
+.bar-chart-bar { flex: 1; background: var(--teal); border-radius: 3px 3px 0 0; opacity: 0.7; transition: opacity 0.2s; }
+.bar-chart-bar:hover { opacity: 1; }
+
+/* FLOATING TAGS */
+.float-tag {
+  position: absolute;
+  background: var(--slate);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal2);
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  animation: floatTag 3s ease infinite;
+}
+.float-tag:nth-child(1) { top: -16px; right: 20px; animation-delay: 0s; }
+.float-tag:nth-child(2) { bottom: 40px; left: -20px; animation-delay: 1s; }
+@keyframes floatTag { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+
+/* LOGOS STRIP */
+.logos-strip {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.logos-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 5%;
+  text-align: center;
+}
+.logos-label { font-size: 12px; color: var(--muted2); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; font-weight: 500; }
+.logos-row { display: flex; gap: 48px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.logo-item {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted2);
+  letter-spacing: -0.3px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  cursor: default;
+}
+.logo-item:hover { opacity: 1; color: var(--muted); }
+
+/* ── SECTION TITLES ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 560px;
+}
+.section-header { margin-bottom: 56px; }
+
+/* ── PRODUCTS ── */
+.products { padding: 96px 0; }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 26px;
+  transition: all 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--grad);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.product-card:hover { background: var(--card-hover); border-color: rgba(14,165,233,0.2); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+.product-card:hover::before { opacity: 1; }
+.product-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--teal-faint);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 18px;
+  transition: all 0.2s;
+}
+.product-card:hover .product-icon { background: rgba(14,165,233,0.12); transform: scale(1.05); }
+.product-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: -0.3px; }
+.product-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.product-link { font-size: 12px; color: var(--teal); margin-top: 14px; display: flex; align-items: center; gap: 5px; font-weight: 500; opacity: 0; transition: opacity 0.2s; }
+.product-card:hover .product-link { opacity: 1; }
+
+/* ── INDUSTRIES ── */
+.industries { padding: 96px 0; background: linear-gradient(180deg, transparent, rgba(14,165,233,0.02) 50%, transparent); }
+.industries-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.industry-card {
+  flex: 1;
+  min-width: 160px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 22px;
+  text-align: center;
+  transition: all 0.25s;
+  cursor: default;
+}
+.industry-card:hover { border-color: var(--border2); background: var(--teal-faint); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+.industry-icon { font-size: 32px; margin-bottom: 12px; }
+.industry-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.industry-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── HOW IT WORKS ── */
+.howitworks { padding: 96px 0; }
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 28px; left: calc(16% + 28px); right: calc(16% + 28px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--teal), #6366f1);
+  opacity: 0.3;
+}
+.step-card { text-align: center; padding: 0 16px; }
+.step-num {
+  width: 56px; height: 56px;
+  background: var(--teal-faint);
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--teal2);
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s;
+}
+.step-card:hover .step-num { background: var(--teal); color: var(--navy); border-color: var(--teal); box-shadow: 0 0 28px rgba(14,165,233,0.4); }
+.step-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.step-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 96px 0; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.testi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  transition: all 0.25s;
+}
+.testi-card:hover { border-color: rgba(14,165,233,0.2); transform: translateY(-2px); }
+.testi-stars { color: #f59e0b; font-size: 13px; margin-bottom: 16px; letter-spacing: 2px; }
+.testi-quote { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 20px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+.testi-name { font-weight: 600; font-size: 13px; color: var(--white); }
+.testi-role { font-size: 11px; color: var(--muted); }
+
+/* ── PRICING ── */
+.pricing { padding: 96px 0; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pricing-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: all 0.25s;
+  position: relative;
+}
+.pricing-card.featured {
+  border-color: var(--border2);
+  background: linear-gradient(160deg, rgba(14,165,233,0.08), rgba(99,102,241,0.05));
+  box-shadow: 0 0 0 1px rgba(14,165,233,0.15), 0 20px 60px rgba(14,165,233,0.1);
+}
+.pricing-card:hover { transform: translateY(-3px); }
+.pricing-badge {
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--grad);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pricing-tier { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--teal); margin-bottom: 10px; }
+.pricing-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.pricing-price sup { font-size: 20px; vertical-align: super; }
+.pricing-period { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+.pricing-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
+.pricing-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.pricing-features { list-style: none; margin-bottom: 28px; }
+.pricing-features li {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+.feat-check { color: var(--teal); font-size: 13px; margin-top: 1px; flex-shrink: 0; }
+.pricing-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.pricing-btn.outline {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--text);
+}
+.pricing-btn.outline:hover { border-color: var(--teal); color: var(--white); background: var(--teal-faint); }
+.pricing-btn.solid {
+  background: var(--teal);
+  color: var(--navy);
+  box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+}
+.pricing-btn.solid:hover { background: var(--teal2); transform: translateY(-1px); }
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  margin: 0 5%;
+  padding: 72px 64px;
+  background: linear-gradient(135deg, var(--navy3), var(--slate));
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 96px;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(14,165,233,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-title { font-family: 'Syne', sans-serif; font-size: clamp(28px,3.5vw,42px); font-weight: 800; color: var(--white); letter-spacing: -1px; margin-bottom: 14px; }
+.cta-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 56px 5% 32px;
+  max-width: 100%;
+}
+.footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.footer-brand-desc { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 240px; }
+.footer-col-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white); margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  max-width: 1160px; margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  font-size: 12px;
+  color: var(--muted2);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.animate-up.visible { opacity: 1; transform: translateY(0); }
+
+@media(max-width:900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  .testi-grid, .pricing-grid, .steps-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .industries-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    InTouchLink
+  </div>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#demo" class="nav-cta">Book a Demo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Now serving 500+ communities worldwide
+      </div>
+      <h1 class="hero-title">One platform to manage <span>communities, communication & operations.</span></h1>
+      <p class="hero-sub">InTouchLink brings digital signage, resident messaging, event management, and service requests into a single unified platform — built for healthcare, education, hospitality, and beyond.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="scrollTo('#demo')">Book a Free Demo →</button>
+        <button class="btn-ghost">
+          <div class="play-icon">▶</div>
+          See how it works
+        </button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-tag">✦ 99.9% Uptime SLA</div>
+      <div class="float-tag">📈 2.4x Engagement Lift</div>
+      <div class="hero-card">
+        <div class="hc-topbar">
+          <div class="hc-dots"><div class="hc-dot"></div><div class="hc-dot"></div><div class="hc-dot"></div></div>
+          <div class="hc-url">app.intouchlink.com/dashboard</div>
+        </div>
+        <div class="hc-body">
+          <div class="stat-row">
+            <div class="stat-mini"><div class="stat-mini-val">1,247</div><div class="stat-mini-label">ACTIVE RESIDENTS</div><div class="stat-mini-change">↑ 12% this month</div></div>
+            <div class="stat-mini"><div class="stat-mini-val">94%</div><div class="stat-mini-label">ENGAGEMENT RATE</div><div class="stat-mini-change">↑ 6% vs last month</div></div>
+            <div class="stat-mini"><div class="stat-mini-val">38</div><div class="stat-mini-label">EVENTS THIS WEEK</div><div class="stat-mini-change">↑ 3 new added</div></div>
+          </div>
+          <div class="hc-chart">
+            <div class="bar-chart-bar" style="height:40%"></div>
+            <div class="bar-chart-bar" style="height:65%"></div>
+            <div class="bar-chart-bar" style="height:50%"></div>
+            <div class="bar-chart-bar" style="height:80%"></div>
+            <div class="bar-chart-bar" style="height:60%"></div>
+            <div class="bar-chart-bar" style="height:90%;opacity:1;background:var(--teal)"></div>
+            <div class="bar-chart-bar" style="height:75%"></div>
+          </div>
+          <div class="hc-row">
+            <div class="hc-block" style="flex:2"></div>
+            <div class="hc-block" style="flex:1"></div>
+            <div class="hc-block" style="flex:1.5"></div>
+          </div>
+          <div class="hc-row">
+            <div class="hc-block" style="flex:1"></div>
+            <div class="hc-block" style="flex:2.5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-strip">
+  <div class="logos-inner">
+    <div class="logos-label">Trusted by leading organizations</div>
+    <div class="logos-row">
+      <div class="logo-item">Sunrise Senior Living</div>
+      <div class="logo-item">Marriott Hotels</div>
+      <div class="logo-item">Stanford Health</div>
+      <div class="logo-item">Brookfield Properties</div>
+      <div class="logo-item">Ontario School Board</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="section-header animate-up">
+      <div class="section-label">Platform Modules</div>
+      <h2 class="section-title">Everything your community needs,<br>in one place.</h2>
+      <p class="section-sub">Five integrated modules that work together to streamline operations, boost resident engagement, and reduce administrative overhead.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card animate-up">
+        <div class="product-icon">📺</div>
+        <div class="product-name">Digital Signage & Community TV</div>
+        <div class="product-desc">Broadcast announcements, menus, events, and custom content to any screen across your facility. Real-time updates, centrally managed.</div>
+        <div class="product-link">Learn more →</div>
+      </div>
+      <div class="product-card animate-up">
+        <div class="product-icon">💬</div>
+        <div class="product-name">Community Portal & Messaging</div>
+        <div class="product-desc">Two-way communication between staff, residents, and families. Announcements, direct messaging, and automated notifications in one hub.</div>
+        <div class="product-link">Learn more →</div>
+      </div>
+      <div class="product-card animate-up">
+        <div class="product-icon">🗓️</div>
+        <div class="product-name">Activity & Event Management</div>
+        <div class="product-desc">Schedule, promote, and track attendance for every event. RSVP management, calendar sync, and engagement analytics built in.</div>
+        <div class="product-link">Learn more →</div>
+      </div>
+      <div class="product-card animate-up">
+        <div class="product-icon">🍽️</div>
+        <div class="product-name">Menu & Meal Tracking</div>
+        <div class="product-desc">Digital menus with dietary preferences, allergen flags, and daily specials. Residents can pre-order — staff see real-time meal data.</div>
+        <div class="product-link">Learn more →</div>
+      </div>
+      <div class="product-card animate-up">
+        <div class="product-icon">🔧</div>
+        <div class="product-name">Service Requests & Integrations</div>
+        <div class="product-desc">Submit and track maintenance requests digitally. Integrates with Alexa voice assistants, CCTV systems, and your existing CRM stack.</div>
+        <div class="product-link">Learn more →</div>
+      </div>
+      <div class="product-card animate-up" style="background: var(--teal-faint); border-color: var(--border2);">
+        <div class="product-icon" style="background: rgba(14,165,233,0.15);">✦</div>
+        <div class="product-name" style="color: var(--teal2);">All Modules Unified</div>
+        <div class="product-desc">Every module shares a single data layer — resident profiles, preferences, and history flow across the entire platform automatically.</div>
+        <div class="product-link" style="opacity:1">View full platform →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries" id="industries">
+  <div class="container">
+    <div class="section-header animate-up">
+      <div class="section-label">Built For Every Sector</div>
+      <h2 class="section-title">One platform. Every industry.</h2>
+      <p class="section-sub">InTouchLink adapts to your environment — not the other way around. We've rebuilt the platform to serve any community-driven organization.</p>
+    </div>
+    <div class="industries-grid">
+      <div class="industry-card animate-up">
+        <div class="industry-icon">🏥</div>
+        <div class="industry-name">Healthcare</div>
+        <div class="industry-desc">Patient communication, wayfinding, and care coordination</div>
+      </div>
+      <div class="industry-card animate-up">
+        <div class="industry-icon">🎓</div>
+        <div class="industry-name">Education</div>
+        <div class="industry-desc">Campus announcements, event scheduling, and student portals</div>
+      </div>
+      <div class="industry-card animate-up">
+        <div class="industry-icon">🏨</div>
+        <div class="industry-name">Hospitality</div>
+        <div class="industry-desc">Guest experiences, in-room services, and property operations</div>
+      </div>
+      <div class="industry-card animate-up">
+        <div class="industry-icon">🏢</div>
+        <div class="industry-name">Corporate</div>
+        <div class="industry-desc">Internal comms, office management, and employee engagement</div>
+      </div>
+      <div class="industry-card animate-up">
+        <div class="industry-icon">🏘️</div>
+        <div class="industry-name">Residential</div>
+        <div class="industry-desc">Community management, resident portals, and service requests</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="howitworks">
+  <div class="container">
+    <div class="section-header animate-up" style="text-align:center">
+      <div class="section-label">Simple Setup</div>
+      <h2 class="section-title">Live in three steps.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card animate-up">
+        <div class="step-num">01</div>
+        <div class="step-title">Connect Your Community</div>
+        <div class="step-desc">Onboard your team and residents in minutes. Import existing data or start fresh — our team handles the migration.</div>
+      </div>
+      <div class="step-card animate-up">
+        <div class="step-num">02</div>
+        <div class="step-title">Manage Communication</div>
+        <div class="step-desc">Push announcements to screens, send messages to residents, and keep families informed — all from a single dashboard.</div>
+      </div>
+      <div class="step-card animate-up">
+        <div class="step-num">03</div>
+        <div class="step-title">Automate Operations</div>
+        <div class="step-desc">Let InTouchLink handle scheduling, service requests, and reporting so your staff can focus on what matters.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header animate-up" style="text-align:center">
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">Loved by operations teams.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card animate-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"InTouchLink transformed how we communicate with our 400+ residents. Engagement went from 40% to over 90% in the first three months."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #0ea5e9, #6366f1)">SM</div>
+          <div><div class="testi-name">Sarah Mitchell</div><div class="testi-role">Director of Operations · Sunrise Communities</div></div>
+        </div>
+      </div>
+      <div class="testi-card animate-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"We replaced four separate tools with InTouchLink. Our admin team saved 12 hours per week and the residents actually use it."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444)">JP</div>
+          <div><div class="testi-name">James Park</div><div class="testi-role">VP Technology · Brookfield Residential</div></div>
+        </div>
+      </div>
+      <div class="testi-card animate-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"The digital signage module alone was worth it. Setup took less than a day and our guests immediately noticed the difference."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #22c55e, #0ea5e9)">LR</div>
+          <div><div class="testi-name">Lisa Ramos</div><div class="testi-role">General Manager · The Grand Hotel Group</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header animate-up" style="text-align:center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Transparent, scalable pricing.</h2>
+      <p class="section-sub" style="margin:0 auto">Start small and grow. Every plan includes onboarding support, unlimited content updates, and 99.9% uptime SLA.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card animate-up">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price"><sup>$</sup>299</div>
+        <div class="pricing-period">per month · up to 100 residents</div>
+        <div class="pricing-desc">Perfect for small communities getting started with digital communication.</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="feat-check">✓</span>Community Portal & Messaging</li>
+          <li><span class="feat-check">✓</span>Up to 3 Digital Signage screens</li>
+          <li><span class="feat-check">✓</span>Activity & Event Management</li>
+          <li><span class="feat-check">✓</span>Email & chat support</li>
+        </ul>
+        <button class="pricing-btn outline">Get Started</button>
+      </div>
+      <div class="pricing-card featured animate-up">
+        <div class="pricing-badge">MOST POPULAR</div>
+        <div class="pricing-tier">Professional</div>
+        <div class="pricing-price"><sup>$</sup>699</div>
+        <div class="pricing-period">per month · up to 500 residents</div>
+        <div class="pricing-desc">The complete platform for established communities that need full operational coverage.</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="feat-check">✓</span>All Starter features</li>
+          <li><span class="feat-check">✓</span>Menu & Meal Tracking</li>
+          <li><span class="feat-check">✓</span>Unlimited Signage screens</li>
+          <li><span class="feat-check">✓</span>Service Requests + Integrations</li>
+          <li><span class="feat-check">✓</span>Advanced analytics dashboard</li>
+          <li><span class="feat-check">✓</span>Priority support + onboarding</li>
+        </ul>
+        <button class="pricing-btn solid">Book a Demo</button>
+      </div>
+      <div class="pricing-card animate-up">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price" style="font-size:28px;letter-spacing:-0.5px;padding-top:6px">Custom</div>
+        <div class="pricing-period">multi-site · unlimited residents</div>
+        <div class="pricing-desc">For large organizations running multiple locations with custom integration requirements.</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="feat-check">✓</span>All Professional features</li>
+          <li><span class="feat-check">✓</span>Multi-site management</li>
+          <li><span class="feat-check">✓</span>Custom CRM & API integrations</li>
+          <li><span class="feat-check">✓</span>SSO & enterprise security</li>
+          <li><span class="feat-check">✓</span>Dedicated account manager</li>
+          <li><span class="feat-check">✓</span>SLA with 4-hour response</li>
+        </ul>
+        <button class="pricing-btn outline">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="demo">
+  <div class="cta-banner animate-up">
+    <div class="section-label" style="margin-bottom:16px">Ready to modernize?</div>
+    <h2 class="cta-title">See InTouchLink in action.<br>Book your free demo today.</h2>
+    <p class="cta-sub">30-minute personalized walkthrough. No commitment. See exactly how InTouchLink fits your organization.</p>
+    <div class="cta-actions">
+      <button class="btn-primary" style="padding:15px 36px;font-size:15px">Book a Free Demo →</button>
+      <button class="btn-ghost" style="color:var(--muted)">Talk to sales first</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name"><div class="nav-logo-dot"></div>InTouchLink</div>
+      <div class="footer-brand-desc">Community communication and operations platform for healthcare, hospitality, education, and residential organizations.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Products</div>
+      <ul>
+        <li><a href="#">Digital Signage</a></li>
+        <li><a href="#">Community Portal</a></li>
+        <li><a href="#">Event Management</a></li>
+        <li><a href="#">Meal Tracking</a></li>
+        <li><a href="#">Integrations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Industries</div>
+      <ul>
+        <li><a href="#">Healthcare</a></li>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Hospitality</a></li>
+        <li><a href="#">Corporate</a></li>
+        <li><a href="#">Residential</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <ul>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">Webinars</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 InTouchLink. All rights reserved.</span>
+    <span style="color:var(--muted2);font-size:11px">Design concept — Proposal demo</span>
+  </div>
+</footer>
+
+<script>
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
